@@ -32,7 +32,13 @@
  ) ;
 
 $objrestaurant=new Mytable("restaurants");
-echo $objrestaurant->afficherTable(); 
+
+
+//$data=["La tavola","1, rue des mimosas Aix-en-Provence 13100",50, "Restaurant fabulous accueil formidable, addition assomante mais service très sympathique",9.9,"2021-08-15" ];
+//echo $objrestaurant->modifierOccurence("2",$data);
+
+echo $objrestaurant->afficherTable();
+
 // $objrestaurant->recupTableauColumns();
 /*
 try {
