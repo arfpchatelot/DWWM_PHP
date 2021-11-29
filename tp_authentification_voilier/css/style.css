@@ -1,0 +1,57 @@
+fieldset { width:12%;
+display:block;
+margin-left: auto;
+margin-right: auto;
+
+border-radius: 6px;
+}
+input[type=text] {
+    border-radius: 4px;
+    padding:12px;
+    border: 1px solid #ccc;
+
+}
+label {
+    display: block;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 12px;
+}
+.txt {
+    display: block;
+margin-bottom:20px ;
+
+
+ }
+
+ 
+ input[type=email] {
+    border-radius: 4px;
+    padding:12px;
+border: 1px solid #ccc;
+
+}
+input[type=password] {
+    border-radius: 4px;
+    padding:12px;
+border: 1px solid #ccc;
+display:block;
+margin-bottom:20px ;
+}
+input[type=number]
+{
+    border-radius: 4px;
+    padding:12px;
+border: 1px solid #ccc;
+}
+
+input[type=submit] {
+   /* display:block;*/
+    background-color: #996633;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+   float: right;
+} 
