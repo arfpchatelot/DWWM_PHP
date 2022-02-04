@@ -31,6 +31,43 @@ public function calculMensualite()
 
 }
 
+public function tableauAmortissement()
+{
+
+echo "<table><thead><tr><td>Nombre de mois</td><td>Part intérêt</td><td>Part amortissement</td><td>Capital restant dû</td><td>Mensualité</td></tr></thead><tbody>";
+$numMois=1;
+$capitalRestant=0;
+$partInteret=0;
+$partAmrt=0;
+$mensualite=$this->calculMensualite();
+
+do {
+   
+
+    if ($numMois==1) 
+    {
+        $capitalRestant=$this->capital;
+    }
+    else 
+    {
+         $capitalRestant=$capitalRestant-$partAmrt;
+    }
+    $partInteret=$capitalRestant*$this->tauxMensuel;
+    $partAmrt=  $mensualite - $partInteret;  
+
+
+
+echo "<tr>";
+echo "<td>".$numMois."</td><td>".round($partInteret,2)."</td><td>".round($partAmrt,2)."</td><td>".round($capitalRestant,2)."</td><td>".$mensualite."</td>";
+
+echo "</tr>";
+$numMois++;
+} while ($numMois <= $this->nbMois);
+
+echo "</tbody></table>";
+
+}
+
 
 }  
 
@@ -38,3 +75,4 @@ public function calculMensualite()
 
 
 ?>
+
