@@ -69,10 +69,34 @@ echo "</tbody></table>";
 }
 
 
-}  
+ 
+
+public function getTableau() 
+{
+  $data=array();
+  $mensualite=$this->calculMensualite();
+ $partInteret=0;
+ $partAmrt=0;
+ $capitalRestant=$this->capital;
+  for ($i=0; $i < $this->nbMois ; $i++) { 
+    if ($i>0) 
+    {
+        
+  
+         $capitalRestant=$capitalRestant-$partAmrt;
+    }
+    $partInteret=$capitalRestant*$this->tauxMensuel;
+    $partAmrt= $mensualite-$partInteret;
+    array_push($data,[ "num_mois"=>$i+1,"partinteret"=>round($partInteret,2), "partAmrt"=>round($partAmrt,2), "capital_restant"=> round($capitalRestant,2), "mensualite_cste"=>$mensualite] );
+
+
+  }
+  return $data;
+}
 
 
 
+}
 
 ?>
 
