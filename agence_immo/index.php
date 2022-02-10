@@ -33,7 +33,7 @@ require("./models/connection.php");
 		 
 		
 		 
-		  echo'<form  action="index.php" method="GET" >
+		  echo'<form  action="index.php" method="GET"  enctype="multipart/form-data" >
 				 <fieldset><legend>Rechercher un Bien immobilier</legend>
 				 
 				  <div class="form-group">
@@ -104,32 +104,55 @@ echo"</select></div>";
 	
 	 //$rq= "select * from biens_immobiliers inner join categories on categories.id_categorie=biens_immobiliers.id_categorie  where lib_categorie=".$categorie; 
 	
+$finrq="";
+
+if (isset($_GET["nbpieces"]) && $_GET["nbpieces"]!='' && isset($_GET["budget"]) &&  $_GET["budget"]>10000 ) {
+	
+		$finrq=" and nbr_pieces =? and prix_vente <= ?";
+
+
+}
+
+
+
+
+
 	switch ($categorie) {
 		case 'appartement':
-			$rq= "select * from biens_immobiliers where id_categorie=1";
+			$rq= "select * from biens_immobiliers where id_categorie=1".$finrq;
 			break;
 		case 'maison individuelle':
 	
-			$rq= "select * from biens_immobiliers where id_categorie=2";
+			$rq= "select * from biens_immobiliers where id_categorie=2".$finrq;
 		 break;
 	
 		case 'terrain':
-			$rq= "select * from biens_immobiliers where id_categorie=3";
+			$rq= "select * from biens_immobiliers where id_categorie=3".$finrq;
 			break;
 	
 		case "local professionnel":
-			$rq= "select * from biens_immobiliers where id_categorie=4";
+			$rq= "select * from biens_immobiliers where id_categorie=4".$finrq;
 			break;
 			
 		default :
-			$rq ="select * from biens_immobiliers";
+			$rq ="select * from biens_immobiliers".$finrq;
 			break;
 		   }
 	
 			$connect=maConnection::getInstance();
 				 $state=$connect->prepare($rq);
-					   
-				 $state->execute();
+				
+				 
+				 if($finrq!="")
+				 {   $state->execute( array($_GET["nbpieces"],$_GET["budget"]));
+				
+				}
+				 else
+				 {
+
+					$state->execute();
+				 }
+				
 	
 
 	   	 $tab= $state->fetchAll();
